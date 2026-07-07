@@ -4,15 +4,15 @@ Step-by-step instructions for getting the AI Job Search framework running.
 
 ## 1. Prerequisites
 
-### Claude Code
+### GitHub Copilot CLI
 
-Install Claude Code (Anthropic's CLI for Claude):
+Install GitHub Copilot CLI:
 
 ```bash
-npm install -g @anthropic-ai/claude-code
+npm install -g @github/copilot
 ```
 
-You'll need an Anthropic API key or a Claude Pro/Team subscription. See the [Claude Code docs](https://docs.anthropic.com/en/docs/claude-code) for details.
+You'll need an active GitHub Copilot subscription. If you install through npm, you also need Node.js 22 or later. See the [Copilot CLI install docs](https://docs.github.com/en/copilot/how-tos/copilot-cli/set-up-copilot-cli/install-copilot-cli) for alternative install methods.
 
 ### Python
 
@@ -98,22 +98,23 @@ If you're outside Denmark, you can generate an equivalent search skill for your 
 
 ## 4. Run the setup interview
 
-Start Claude Code in the repository:
+Start Copilot CLI in the repository:
 
 ```bash
-claude
+copilot
 ```
 
-Then run the onboarding:
+If this is your first time using Copilot CLI, run `/login` first. Then run the onboarding:
 
 ```
+/login
 /setup
 ```
 
-Claude will offer three paths:
+Copilot will offer three paths:
 
-- **Path A (documents folder):** Add your CV, LinkedIn export, diplomas, references, or past applications under `documents/`. Claude reads and cross-references them before proposing profile updates. This is best when you have several source files.
-- **Path B (single CV import):** Share one CV/resume by mentioning the file with `@` or pasting the text. Claude extracts it and asks follow-up questions for anything missing.
+- **Path A (documents folder):** Add your CV, LinkedIn export, diplomas, references, or past applications under `documents/`. Copilot reads and cross-references them before proposing profile updates. This is best when you have several source files.
+- **Path B (single CV import):** Share one CV/resume by mentioning the file with `@` or pasting the text. Copilot extracts it and asks follow-up questions for anything missing.
 - **Path C (interview mode):** Answer structured interview questions section by section.
 
 All three paths produce the same result: fully populated profile files.
@@ -170,7 +171,7 @@ Or paste the job description directly:
 /apply [paste job posting text here]
 ```
 
-Claude will:
+Copilot will:
 1. Evaluate the fit against your profile
 2. Ask if you want to proceed
 3. Draft a tailored CV and cover letter
@@ -211,8 +212,8 @@ Make sure Bun is installed and you ran `bun install` in each CLI directory. The 
 ### Fonts not found in cover letter
 The cover letter template expects fonts in `cover_letters/OpenFonts/fonts/`. Make sure this directory exists and contains the Lato and Raleway font files.
 
-### Stale `.claude/settings.local.json` from an older clone
-Shared Claude Code permissions now live in `.claude/settings.json` (scoped to `bun run` and `python salary_lookup.py`). Earlier versions of this repo committed a broader `.claude/settings.local.json` that pre-approved `Bash(curl:*)`, `Bash(python:*)` and `Bash(bun:*)`. If you cloned before that change, git leaves the old file behind in your working copy, and its permissions still apply on top of `settings.json`. Delete it (or trim it to your own personal overrides):
+### Optional cleanup for legacy `.claude/settings.local.json`
+This fork now targets Copilot CLI. The `.claude/settings*.json` files are only relevant if you still use Claude Code as a secondary interface. If an older clone left behind `.claude/settings.local.json`, you can delete it (or trim it to your own personal overrides):
 
 ```bash
 rm .claude/settings.local.json
